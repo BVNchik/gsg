@@ -1,12 +1,22 @@
 # Description
 
-A public service for providing the opportunity to fill out various forms (for example: Claim filing) to any user.
+          **`GSG`**
 
-Written in React
+**`Github Statistics Generator`**
+
+## Pre-requirements
+
+- `node` - see `.node-version` for version. Also please use node version manager like `asdf` or `nodenv`
+
+- `yarn`
+
+  - Make sure your yarn version is < 2
+
+    > yarn -v
 
 # Installation
 
-- install node. For version see `.node-version` file
+- install node
 
 - install dependencies, while in the root of the repo
 

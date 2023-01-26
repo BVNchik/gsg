@@ -1,18 +1,17 @@
-"use strict";
-
-const path = require("path");
-const dotenv = require("dotenv");
-const dotenvExpand = require("dotenv-expand");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+/* eslint-disable @typescript-eslint/no-var-requires */
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const dotenv = require("dotenv");
+const dotenvExpand = require("dotenv-expand");
 const Dotenv = require("dotenv-webpack");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 const myEnv = dotenv.config();
 dotenvExpand.expand(myEnv);
 
 module.exports = () => {
-  console.log("Webpack is running", { test: process.env });
+  console.log("Webpack is running");
   return {
     mode: "development",
     devServer: {
@@ -34,6 +33,11 @@ module.exports = () => {
       modules: [path.join(__dirname, "src"), "node_modules"],
       alias: {
         react: path.join(__dirname, "node_modules", "react"),
+        components: path.resolve(__dirname, "src/components/"),
+        pages: path.resolve(__dirname, "src/pages/"),
+        Graphql: path.resolve(__dirname, "src/graphql/"),
+        lib: path.resolve(__dirname, "src/lib/"),
+        utils: path.resolve(__dirname, "src/utils/"),
       },
       extensions: [".tsx", ".ts", ".js"],
     },
@@ -65,6 +69,41 @@ module.exports = () => {
             },
             {
               loader: "css-loader",
+            },
+          ],
+        },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "static/media/[name].[contenthash].[ext]",
+              },
+            },
+          ],
+        },
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: "@svgr/webpack",
+              options: {
+                svgoConfig: {
+                  plugins: [
+                    {
+                      name: "removeViewBox",
+                      active: false,
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              loader: "file-loader",
+              options: {
+                name: "static/media/[name].[hash:8].[ext]",
+              },
             },
           ],
         },
