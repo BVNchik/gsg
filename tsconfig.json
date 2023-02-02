@@ -15,9 +15,11 @@
     "target": "es2019",
     "paths": {
       "config": ["./src/config.ts"],
-      "pages": ["./src/pages"],
-      "components": ["./src/components"],
-      "graphql": ["./src/graphql"]
+      "pages/*": ["./src/pages/*"],
+      "components/*": ["./src/components/*"],
+      "graphql/*": ["./src/graphql/*"],
+      "lib/*": ["./src/lib/*"],
+      "utils/*": ["./src/utils/*"]
     }
   },
   "exclude": ["node_modules", "dist"],
