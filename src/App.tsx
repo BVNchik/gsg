@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 
 import { ApolloProvider } from "@apollo/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 import { GlobalStyles } from "./components/GlobalStyles";
 import { initApolloClient } from "./graphql/init-apollo-client";
@@ -13,7 +13,7 @@ export default function App(): ReactElement {
   return (
     <ApolloProvider client={initApolloClient()}>
       <SelectedProjectProvider>
-        <BrowserRouter>
+        <HashRouter>
           <GlobalStyles />
           <Routes>
             {routes.map((prop, key) => {
@@ -23,7 +23,7 @@ export default function App(): ReactElement {
             })}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </SelectedProjectProvider>
     </ApolloProvider>
   );

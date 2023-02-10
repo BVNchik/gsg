@@ -37,13 +37,14 @@ export function Settings(): ReactElement {
   const [token, setToken] = useState<string>(getApiToken() || "");
   const [isValidToken, setIsValidToken] = useState<boolean>(false);
 
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => setToken(event.target.value),
-    []
-  );
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setToken(value);
+    if (checkToken(value)) return setIsValidToken(true);
+    return setIsValidToken(true);
+  }, []);
 
   const [fetchViewer, { data, loading }] = useLazyQuery<ViewerResult>(VIEWER, {
-    fetchPolicy: "no-cache",
     onError(error) {
       const { networkError } = error;
       if (
@@ -73,7 +74,7 @@ export function Settings(): ReactElement {
   }, []);
 
   const handleGSG = useCallback(() => {
-    window.open("/statistic", "_self");
+    window.open("#/statistic", "_self");
   }, []);
 
   useEffect(() => {

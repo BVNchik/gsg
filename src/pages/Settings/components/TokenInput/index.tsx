@@ -29,7 +29,7 @@ export function TokenInput({
   return (
     <Container>
       <TextInput
-        isValid={isValidToken}
+        isValid={!!value && isValidToken}
         label="Your token"
         value={value}
         onChange={onChange}
