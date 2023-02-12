@@ -55,7 +55,7 @@ export function Statistic(): ReactElement | null {
   const [[dateRange], setDateRanges] = useState<Range[]>([
     {
       startDate: undefined,
-      endDate: new Date(""),
+      endDate: new Date(""), // HACK: without initial selection https://github.com/hypeserver/react-date-range/issues/330
       key: "selection",
     },
   ]);
@@ -65,18 +65,18 @@ export function Statistic(): ReactElement | null {
     []
   );
 
-  const handleChange = useCallback(
+  const handleDateChange = useCallback(
     (item: RangeKeyDict) => setDateRanges([item.selection]),
     []
   );
 
-  const handleChangeRows = useCallback(
+  const handleRowsChange = useCallback(
     (option: SingleValue<RowOption>) =>
       setRows(option?.value || DEFAULT_OPTION.value),
     []
   );
 
-  const handleChangeProject = useCallback(
+  const handleProjectChange = useCallback(
     (option: SingleValue<ProjectOption>) => {
       if (option?.value) updateSelectedProject(option.value);
     },
@@ -95,7 +95,7 @@ export function Statistic(): ReactElement | null {
           <Select<ProjectOption>
             options={projectOptions}
             label="Projects"
-            onChange={handleChangeProject}
+            onChange={handleProjectChange}
             defaultValue={defaultProject}
           />
           <BranchAutocomplete
@@ -105,12 +105,12 @@ export function Statistic(): ReactElement | null {
           <DateRangePicker
             label={"Date period"}
             ranges={[dateRange]}
-            onChange={handleChange}
+            onChange={handleDateChange}
           />
           <Select<RowOption>
             options={ROW_OPTIONS}
             label="Rows"
-            onChange={handleChangeRows}
+            onChange={handleRowsChange}
             defaultValue={DEFAULT_OPTION}
           />
         </Settings>
