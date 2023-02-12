@@ -18,8 +18,8 @@ import { useRepository } from "./hooks";
 import {
   ProjectRow,
   ProjectInput,
-  SelectButton,
-  RemoveButton,
+  Button,
+  ActionButton,
   Logo,
   Icon,
 } from "./styles";
@@ -28,10 +28,12 @@ export function Project({
   project: initialProject,
   index,
   onRemove,
+  isOneProject,
 }: {
   project: string;
   index: number;
   onRemove: (index: number) => void;
+  isOneProject: boolean;
 }): ReactElement {
   const [project, setProject] = useState(initialProject);
   const { updateSelectedProject, selectedProject } = useContext(
@@ -57,6 +59,8 @@ export function Project({
     [index, onRemove]
   );
 
+  const handleClearInput = useCallback(() => setProject(""), []);
+
   const handleSelectProject = useCallback(() => {
     updateSelectedProject(project);
   }, [project, updateSelectedProject]);
@@ -65,6 +69,7 @@ export function Project({
     () => project === selectedProject,
     [project, selectedProject]
   );
+
   const { loading, repository } = useRepository({ project });
 
   const validLink = useMemo(() => Boolean(repository), [repository]);
@@ -84,10 +89,14 @@ export function Project({
         onChange={handleProjectChange}
         placeholder="https://github.com/owner/name"
       />
-      <SelectButton onClick={handleSelectProject} disabled={!validLink}>
+      <Button onClick={handleSelectProject} disabled={!validLink}>
         {isSelected ? "Selected" : `Select`}
-      </SelectButton>
-      <RemoveButton onClick={handleRemoveProject}>Remove</RemoveButton>
+      </Button>
+      {isOneProject ? (
+        <ActionButton onClick={handleClearInput}>Clear</ActionButton>
+      ) : (
+        <ActionButton onClick={handleRemoveProject}>Remove</ActionButton>
+      )}
     </ProjectRow>
   );
 }

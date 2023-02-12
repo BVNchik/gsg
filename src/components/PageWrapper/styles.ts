@@ -10,8 +10,8 @@ export const Background = styled.div`
   z-index: -1;
 `;
 
-export const Wrapper = styled.div<{ withLogo: boolean }>`
-  display: ${(props) => (props.withLogo ? "block" : "flex")};
+export const Wrapper = styled.div<{ withHeader: boolean }>`
+  display: ${(props) => (props.withHeader ? "block" : "flex")};
   height: 100%;
   width: 100vw;
 `;

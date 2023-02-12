@@ -7,7 +7,7 @@ import { Container, StartLink, Logo } from "./styles";
 
 export function Home(): ReactElement {
   return (
-    <PageWrapper withLogo={false}>
+    <PageWrapper withHeader={false}>
       <Container>
         <Logo />
         <LogoAnimation />

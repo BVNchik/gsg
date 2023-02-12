@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { Button as BaseButton } from "components/Button";
 import { TextInput } from "components/TextInput";
 
 export const ProjectRow = styled.div`
@@ -10,13 +11,9 @@ export const ProjectRow = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled(BaseButton)`
   background-color: #288fc1;
-  border: none;
-  cursor: pointer;
-  width: 100%;
   margin: 10px 0;
-  padding: 12px;
   flex: 1;
   margin: 0;
   padding: 0;
@@ -35,16 +32,13 @@ export const ProjectInput = styled(TextInput)`
   margin-right: 10px;
 `;
 
-export const SelectButton = styled(Button)``;
-
-export const RemoveButton = styled(Button)`
+export const ActionButton = styled(Button)`
   background-color: #4f282d;
 
   &:hover {
     background-color: #44171c;
   }
 `;
-
 
 export const Logo = styled.img`
   position: absolute;

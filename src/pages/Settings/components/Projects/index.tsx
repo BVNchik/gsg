@@ -30,6 +30,7 @@ export function Projects({
             project={project}
             index={index}
             onRemove={handleRemoveProject}
+            isOneProject={projects.length === 1}
           />
         );
       })}

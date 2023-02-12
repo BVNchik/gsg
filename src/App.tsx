@@ -13,6 +13,8 @@ export default function App(): ReactElement {
   return (
     <ApolloProvider client={initApolloClient()}>
       <SelectedProjectProvider>
+        {/* XXX:  GitHub pages doesn't support the tech used by the BrowserRouter
+        https://create-react-app.dev/docs/deployment/#notes-on-client-side-routing */}
         <HashRouter>
           <GlobalStyles />
           <Routes>

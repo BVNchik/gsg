@@ -17,12 +17,7 @@ import { SelectedProjectContext } from "lib/selectedProject/context";
 import { parseProjectUrl } from "utils/parse-url";
 import { getProjects } from "utils/store";
 
-import {
-  Content,
-  Settings,
-  Statistics,
-  DateRangePicker,
-} from "./styles";
+import { Content, Settings, Statistics, DateRangePicker } from "./styles";
 
 const ROW_OPTIONS = [
   { value: 10, label: 10 },
@@ -59,8 +54,8 @@ export function Statistic(): ReactElement | null {
   const [rows, setRows] = useState<number>(100);
   const [[dateRange], setDateRanges] = useState<Range[]>([
     {
-      startDate: new Date(),
-      endDate: undefined,
+      startDate: undefined,
+      endDate: new Date(""),
       key: "selection",
     },
   ]);

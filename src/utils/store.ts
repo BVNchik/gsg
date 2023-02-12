@@ -6,8 +6,8 @@ const API_TOKEN_KEY = "api-token";
 const SELECTED_PROJECT = "selected-project";
 const PROJECTS = "projects";
 
-export function setApiToken(apiToken: string): void {
-  if (!apiToken) removeApiToken();
+export function setApiToken(apiToken?: string): void {
+  if (!apiToken) return removeApiToken();
   const encryptApiToken = CryptoJS.AES.encrypt(
     apiToken,
     secretToken

@@ -27,3 +27,7 @@
 - Run server, while in the root of the repo
 
   > yarn dev
+
+## Deploy on GitHub Pages
+
+> yarn deploy

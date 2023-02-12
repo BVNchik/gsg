@@ -8,11 +8,11 @@ import { Wrapper, Background, Header, LogoContainer } from "./styles";
 
 export function PageWrapper({
   children,
-  withLogo = true,
-}: PropsWithChildren<{ withLogo?: boolean }>): ReactElement {
+  withHeader = true,
+}: PropsWithChildren<{ withHeader?: boolean }>): ReactElement {
   return (
-    <Wrapper withLogo={withLogo}>
-      {withLogo && (
+    <Wrapper withHeader={withHeader}>
+      {withHeader && (
         <Header>
           <LogoContainer>
             <Logo />

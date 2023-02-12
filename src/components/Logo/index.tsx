@@ -9,5 +9,5 @@ export function Logo({
   url?: string;
   className?: string;
 }): ReactElement {
-  return <LogoBase href={url} className={className} />;
+  return <LogoBase to={url} className={className} />;
 }
