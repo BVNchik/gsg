@@ -1,6 +1,5 @@
 import React, { ReactElement, useMemo } from "react";
 
-import { add, format, differenceInCalendarDays } from "date-fns";
 import {
   LineChart,
   Line,
@@ -16,6 +15,7 @@ import { AxisDomain } from "recharts/types/util/types";
 import { TooltipContent } from "./components/TooltipContent";
 import { useCommits } from "./hooks";
 import { Wrapper, Spinner } from "./styles";
+import { dateFormatter, getTicks } from "./utils";
 
 type LineData = {
   index: number;
@@ -42,25 +42,39 @@ export function Commits({
   });
 
   const lineData: LineData[] = useMemo(() => {
-    return commits.map((commit, index) => ({
-      email: commit.author.email,
-      avatarUrl: commit.author.avatarUrl,
-      name: commit.author.name,
-      message: commit.message,
-      date: new Date(commit.committedDate).getTime(),
-      index,
-    }));
+    return commits.map((commit, index) => {
+      const {
+        author: { email, avatarUrl, name },
+        message,
+        committedDate,
+      } = commit;
+      return {
+        email,
+        avatarUrl,
+        name,
+        message,
+        date: new Date(committedDate).getTime(),
+        index,
+      };
+    });
   }, [commits]);
 
-  const domain: AxisDomain = [
-    (dataMin: number) => dataMin,
-    (dateMax: number) => endDate?.getTime() || dateMax,
-  ];
+  const domain: AxisDomain = useMemo(
+    () => [
+      (dataMin: number) => dataMin,
+      (dateMax: number) => endDate?.getTime() || dateMax,
+    ],
+    [endDate]
+  );
 
-  const ticks = getTicks({
-    startDate,
-    endDate,
-  });
+  const ticks = useMemo(
+    () =>
+      getTicks({
+        startDate,
+        endDate,
+      }),
+    [endDate, startDate]
+  );
 
   return (
     <Wrapper>
@@ -93,25 +107,4 @@ export function Commits({
       </ResponsiveContainer>
     </Wrapper>
   );
-}
-
-function getTicks({
-  startDate,
-  endDate,
-}: {
-  startDate?: Date | null;
-  endDate?: Date | null;
-}): number[] {
-  if (!endDate || !startDate) return [];
-  const diffDays = differenceInCalendarDays(endDate, startDate);
-  const ticks = [startDate.getTime()];
-  for (let i = 1; i < diffDays; i++) {
-    ticks.push(add(startDate, { days: i }).getTime());
-  }
-  ticks.push(endDate.getTime());
-  return ticks;
-}
-
-function dateFormatter(date: Date | number) {
-  return format(date, "dd/MMM");
 }

@@ -64,14 +64,7 @@ module.exports = () => {
         },
         {
           test: /\.css$/,
-          use: [
-            {
-              loader: "style-loader",
-            },
-            {
-              loader: "css-loader",
-            },
-          ],
+          use: ["style-loader", "css-loader"],
         },
         {
           test: /\.(png|jpe?g|gif)$/i,
@@ -116,7 +109,7 @@ module.exports = () => {
         template: path.resolve(__dirname, "public/index.html"),
       }),
       new Dotenv({ systemvars: true }),
-      new ReactRefreshWebpackPlugin(), // only for dev
+      !isProduction && new ReactRefreshWebpackPlugin(),
       new CopyPlugin({
         patterns: [
           {
@@ -141,6 +134,6 @@ module.exports = () => {
           },
         ],
       }),
-    ],
+    ].filter(Boolean),
   };
 };

@@ -1,13 +1,20 @@
 import React, { ReactElement } from "react";
 
-import { LogoBase } from "./styles";
+import { Link } from "react-router-dom";
 
-export function Logo({
+import logoIcon from "./logo.png";
+import { Logo } from "./styles";
+
+export function LogoLink({
   url = "/",
   className,
 }: {
   url?: string;
   className?: string;
 }): ReactElement {
-  return <LogoBase to={url} className={className} />;
+  return (
+    <Link to={url}>
+      <Logo className={className} src={logoIcon} />
+    </Link>
+  );
 }

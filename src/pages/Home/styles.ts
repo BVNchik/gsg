@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
-import { Logo as LogoBase } from "components/Logo";
+import { LogoLink } from "components/Logo";
 
 export const Container = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const Logo = styled(LogoBase)`
+export const Logo = styled(LogoLink)`
   position: absolute;
   top: 30%;
   left: 50%;

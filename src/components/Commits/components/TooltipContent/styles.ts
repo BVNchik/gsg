@@ -21,10 +21,13 @@ export const Info = styled.div`
   flex: 3;
   color: white;
 `;
+
 export const Name = styled.div`
   font-size: 18px;
 `;
+
 export const Email = styled.div``;
+
 export const Message = styled.div`
   padding: 5px 0;
   font-style: italic;

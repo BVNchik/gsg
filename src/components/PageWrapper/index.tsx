@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactElement } from "react";
 
-import { Logo } from "components/Logo";
+import { LogoLink } from "components/Logo";
 import { LogoAnimation } from "components/LogoAnimation";
 import { Navigation } from "components/Navigation";
 
@@ -15,7 +15,7 @@ export function PageWrapper({
       {withHeader && (
         <Header>
           <LogoContainer>
-            <Logo />
+            <LogoLink />
           </LogoContainer>
           <LogoAnimation />
           <Navigation />
